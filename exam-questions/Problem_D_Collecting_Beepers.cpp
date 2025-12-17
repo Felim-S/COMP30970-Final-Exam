@@ -44,24 +44,24 @@ int main(){
         int N, M;
         cin >> N >> M;
 
-        double startX, startY;
+        int startX, startY;
         cin >> startX >> startY;
 
         int totalBeepers;
         cin >> totalBeepers;
 
-        vector<pair<double,double>> beepers;
+        vector<pair<int,int>> beepers;
+        beepers.push_back({startX, startY});
         for(int i = 0; i < totalBeepers; i++){
-            double a,b;
+            int a,b;
             cin >> a >> b;
             beepers.push_back({a,b});
         }
         
-
         // calculate the distance between all the beepers
-        vector<vector<double>> distanceMatrix(N, vector<double>(M, 0));
-        for(int i = 0; i < N; i++){
-            for(int j = 1; j < M; j++){
+        vector<vector<int>> distanceMatrix(totalBeepers+1, vector<int>(totalBeepers+1, 0));
+        for(int i = 0; i < totalBeepers+1; i++){
+            for(int j = 0; j < totalBeepers+1; j++){
                 auto[x1,y1] = beepers[i];
                 auto[x2,y2] = beepers[j];
 
@@ -84,8 +84,8 @@ int main(){
 
         // debug
         cout << "\nDistances Matrix (input given):\n";
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < M; j++){
+        for(int i = 0; i < totalBeepers+1; i++){
+            for(int j = 0; j < totalBeepers+1; j++){
                 cout << (distanceMatrix[i][j]) << " ";
             }
             cout << "\n";
@@ -100,8 +100,8 @@ int main(){
         // }
 
         vector<tuple<int, int, int>> edges;
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < M; j++){
+        for(int i = 0; i < totalBeepers+1; i++){
+            for(int j = 0; j < totalBeepers+1; j++){
                 edges.push_back({distanceMatrix[i][j], i, j});
             }
         }
@@ -111,7 +111,7 @@ int main(){
         // minimal spanning tree
         vector<pair<int,int>> T;
 
-        union_find D = union_find(max(N,M));
+        union_find D = union_find(totalBeepers+1);
 
         sort(edges.begin(), edges.end());
         
@@ -140,9 +140,9 @@ int main(){
 
         cout << sum << "\n";
 
-        // for(auto p : T){
-        //     cout << p.first << " " << p.second << "\n";
-        // }
+        for(auto p : T){
+            cout << p.first << " " << p.second << "\n";
+        }
     }
 
     return 0;

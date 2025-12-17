@@ -12,11 +12,22 @@
 #include <set>
 using namespace std;
 
-void rotate3(vector<int>& nums, int i, int j){
-    int lastNum = nums[j];
-    nums[j] = nums[i+1];
+void rotate3(vector<int>& nums, int i){
+    int lastNum = nums[i+2];
+    nums[i+2] = nums[i+1];
     nums[i+1] = nums[i];
     nums[i] = lastNum;
+}
+
+bool tryRotations(vector<int>& start, vector<int> end, int i){
+    if(start == end){ return true; }
+    if(i >= start.size()){ return false; }
+
+    vector<int> original = start;
+
+    rotate3(start, i);
+
+    return (tryRotations(start, end, i+1) || tryRotations(original, end, i+1));
 }
 
 int main(){
@@ -36,35 +47,11 @@ int main(){
         cin >> end[i];
     }
 
-    for(int i = 0; i < n - 2; i++){
-        rotate3(start, i, i+2);
-        
-        // for(int i = 0; i < n; i++){
-        //     cout << start[i] << " ";
-        // }
-        // cout << "\n";
-
-        if(start == end){
-            cout << "Possible";
-            return 0;
-        }
-
-        for(int j = i+1; j < n - 2; j++){
-            rotate3(start, j, j+2);
-
-            // for(int i = 0; i < n; i++){
-            //     cout << start[i] << " ";
-            // }
-            // cout << "\n";
-
-            if(start == end){
-                cout << "Possible";
-                return 0;
-            }
-        }
+    if(tryRotations(start, end, 0)){
+        cout << "Possible";
+    } else{
+        cout << "Impossible";
     }
-
-    cout << "Impossible";
 
     return 0;
 }

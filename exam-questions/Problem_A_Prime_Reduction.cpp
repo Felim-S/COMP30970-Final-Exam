@@ -33,6 +33,21 @@ vector<long long> eratosthenes(long long n){
     return primes;
 }
 
+bool isPrime(long long n){
+    vector<bool> isMarked(n+1, false);
+    
+    for(long long i = 2; i * i <= n; i++){
+        if(!isMarked[i]){
+            for(long long j = i * i; j <= n; j += i){
+                isMarked[j] = true;
+            }
+        }
+    }
+
+    if(!isMarked[n]){ return true; }
+    else{ return false; }
+}
+
 map<long long, long long> factor(long long N) {
     vector<long long> primes;
     primes = eratosthenes((sqrt(N+1)));
@@ -65,9 +80,7 @@ map<long long, long long> factor(long long N) {
 // }
 
 pair<long long, long long> primeReduction(long long N, long long executions){
-    vector<long long> primes;
-    primes = eratosthenes(N);
-    if(primes.back() == N){
+    if(isPrime(N)){
         return {N, executions + 1};
     }
     map<long long, long long> factors = factor(N);
@@ -78,7 +91,6 @@ pair<long long, long long> primeReduction(long long N, long long executions){
         }
     }
     return primeReduction(x, executions + 1);
-    
 }
 
 int main(){

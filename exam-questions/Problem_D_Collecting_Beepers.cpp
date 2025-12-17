@@ -83,13 +83,13 @@ int main(){
         // }
 
         // debug
-        cout << "\nDistances Matrix (input given):\n";
-        for(int i = 0; i < totalBeepers+1; i++){
-            for(int j = 0; j < totalBeepers+1; j++){
-                cout << (distanceMatrix[i][j]) << " ";
-            }
-            cout << "\n";
-        }
+        // cout << "\nDistances Matrix (input given):\n";
+        // for(int i = 0; i < totalBeepers+1; i++){
+        //     for(int j = 0; j < totalBeepers+1; j++){
+        //         cout << (distanceMatrix[i][j]) << " ";
+        //     }
+        //     cout << "\n";
+        // }
         // cout << "\nAdjacency List:\n";
         // for(int i = 0; i < N; i++){
         //     cout << (i+1) << " is connected to: ";
@@ -138,11 +138,14 @@ int main(){
             sum += distanceMatrix[edge.first][edge.second];
         }
 
+        auto lastEdge = T.back();
+        sum += distanceMatrix[lastEdge.first][0];
+
         cout << sum << "\n";
 
-        for(auto p : T){
-            cout << p.first << " " << p.second << "\n";
-        }
+        // for(auto p : T){
+        //     cout << p.first << " " << p.second << "\n";
+        // }
     }
 
     return 0;

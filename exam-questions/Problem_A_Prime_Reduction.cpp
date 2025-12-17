@@ -53,21 +53,21 @@ map<long long, long long> factor(long long N) {
     return factors;
 }
 
-bool isPrime(long long n) {
-    if(n < 2) { return false; }
-    if(n % 2 == 0) { return n == 2; }
+// bool isPrime(long long n) {
+//     if(n < 2) { return false; }
+//     if(n % 2 == 0) { return n == 2; }
 
-    for(long long i = 3; i * i <= n; i += 2){
-        if(n % i == 0) { return false; }
-    }
+//     for(long long i = 3; i * i <= n; i += 2){
+//         if(n % i == 0) { return false; }
+//     }
 
-    return true;
-}
+//     return true;
+// }
 
 pair<long long, long long> primeReduction(long long N, long long executions){
     vector<long long> primes;
     primes = eratosthenes(N);
-    if(count(primes.begin(), primes.end(), N) > 0){
+    if(primes.back() == N){
         return {N, executions + 1};
     }
     map<long long, long long> factors = factor(N);

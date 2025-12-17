@@ -57,6 +57,7 @@ int main(){
             cin >> a >> b;
             beepers.push_back({a,b});
         }
+        beepers.push_back({startX, startY});
         
         // calculate the distance between all the beepers
         vector<vector<int>> distanceMatrix(totalBeepers+1, vector<int>(totalBeepers+1, 0));
@@ -72,29 +73,11 @@ int main(){
             }
         }
 
-        // // calculate the adjacency list
-        // vector<vector<int>> adj(N, vector<int>(M, 0));
-        // for(int i = 0; i < N; i++){
-        //     for(int j = 0; j < M; j++){
-        //         if(distanceMatrix[i][j] != 0){
-        //             adj[i].push_back(j);
-        //         }
-        //     }
-        // }
-
         // debug
         // cout << "\nDistances Matrix (input given):\n";
         // for(int i = 0; i < totalBeepers+1; i++){
         //     for(int j = 0; j < totalBeepers+1; j++){
         //         cout << (distanceMatrix[i][j]) << " ";
-        //     }
-        //     cout << "\n";
-        // }
-        // cout << "\nAdjacency List:\n";
-        // for(int i = 0; i < N; i++){
-        //     cout << (i+1) << " is connected to: ";
-        //     for(int j = 0; j < adj[i].size(); j++){
-        //         cout << (adj[i][j] + 1) << " ";
         //     }
         //     cout << "\n";
         // }

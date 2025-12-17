@@ -20,12 +20,15 @@ int main(){
     string before, after;
     cin >> before >> after;
 
+    string longest = (before.length() > after.length() ? before : after);
+    string shortest = (before.length() < after.length() ? before : after);
+
     int total = 0;
-    for(int i = 0; i < before.length() && i < after.length(); i++){
-        if(before[i] != after[i]){
+    for(int i = 0; i < shortest.length(); i++){
+        if(shortest[i] != longest[i]){
             total++;
-            for(int j = i+1; j < after.length(); j++){
-                if(before[i] != after[j]){
+            for(int j = i+1; j < longest.length(); j++){
+                if(shortest[i] != longest[j]){
                     i = j - 1;
                     break;
                 }

@@ -33,24 +33,11 @@ vector<long long> eratosthenes(long long n){
     return primes;
 }
 
-bool isPrime(long long n){
-    vector<bool> isMarked(n+1, false);
-    
-    for(long long i = 2; i * i <= n; i++){
-        if(!isMarked[i]){
-            for(long long j = i * i; j <= n; j += i){
-                isMarked[j] = true;
-            }
-        }
-    }
-
-    if(!isMarked[n]){ return true; }
-    else{ return false; }
+bool isPrime(long long n, vector<long long> primes){
+    return count(primes.begin(), primes.end(), n);
 }
 
-map<long long, long long> factor(long long N) {
-    vector<long long> primes;
-    primes = eratosthenes((sqrt(N+1)));
+map<long long, long long> factor(long long N, vector<long long> primes) {
     map<long long, long long> factors;
     for(int i = 0; i < primes.size(); ++i){
         long long prime = primes[i], power = 0;
@@ -79,13 +66,13 @@ map<long long, long long> factor(long long N) {
 //     return true;
 // }
 
-pair<long long, long long> primeReduction(long long N, long long executions){
-    if(isPrime(N)){
+pair<long long, long long> primeReduction(long long N, long long executions, vector<long long> primes){
+    if(isPrime(N, primes)){
         return {N, executions + 1};
     }
     long long x = N;
-    while(!isPrime(x)){
-        map<long long, long long> factors = factor(x);
+    while(!isPrime(x, primes)){
+        map<long long, long long> factors = factor(x, primes);
         x = 0;
         for(long long i = 0; i < factors.size(); i++){
             if(factors[i] > 0){
@@ -109,7 +96,9 @@ int main(){
 
         if(N == 4){ break; }
 
-        pair<long long, long long> result = primeReduction(N, 0);
+        vector<long long> primes = eratosthenes(N);
+
+        pair<long long, long long> result = primeReduction(N, 0, primes);
         cout << result.first << " " << result.second << "\n"; 
     }
 

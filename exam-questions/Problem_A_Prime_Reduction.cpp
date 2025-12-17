@@ -65,7 +65,9 @@ bool isPrime(long long n) {
 }
 
 pair<long long, long long> primeReduction(long long N, long long executions){
-    if(isPrime(N)){
+    vector<long long> primes;
+    primes = eratosthenes(N);
+    if(count(primes.begin(), primes.end(), N) > 0){
         return {N, executions + 1};
     }
     map<long long, long long> factors = factor(N);

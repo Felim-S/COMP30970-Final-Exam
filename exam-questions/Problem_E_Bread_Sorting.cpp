@@ -12,6 +12,13 @@
 #include <set>
 using namespace std;
 
+void rotate3(vector<int>& nums, int i, int j){
+    int lastNum = nums[j];
+    nums[j] = nums[i+1];
+    nums[i+1] = nums[i];
+    nums[i] = lastNum;
+}
+
 int main(){
 
     ios::sync_with_stdio(false);
@@ -29,12 +36,7 @@ int main(){
         cin >> end[i];
     }
 
-    reverse(end.begin(), end.end());
-    if(start == end){
-        cout << "Impossible";
-    } else{
-        cout << "Possible";
-    }
+    for(int i =)
 
     return 0;
 }

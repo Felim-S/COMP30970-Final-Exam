@@ -72,7 +72,7 @@ pair<long long, long long> primeReduction(long long N, long long executions){
     long long x = 0;
     for(long long i = 0; i < factors.size(); i++){
         if(factors[i] > 0){
-            x += pow(i, factors[i]);
+            x += i * factors[i];
         }
     }
     return primeReduction(x, executions + 1);

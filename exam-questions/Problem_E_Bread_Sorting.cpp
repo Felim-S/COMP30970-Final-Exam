@@ -36,7 +36,35 @@ int main(){
         cin >> end[i];
     }
 
-    for(int i =)
+    for(int i = 0; i < n - 2; i++){
+        rotate3(start, i, i+2);
+        
+        // for(int i = 0; i < n; i++){
+        //     cout << start[i] << " ";
+        // }
+        // cout << "\n";
+
+        if(start == end){
+            cout << "Possible";
+            return 0;
+        }
+
+        for(int j = i+1; j < n - 2; j++){
+            rotate3(start, j, j+2);
+
+            // for(int i = 0; i < n; i++){
+            //     cout << start[i] << " ";
+            // }
+            // cout << "\n";
+
+            if(start == end){
+                cout << "Possible";
+                return 0;
+            }
+        }
+    }
+
+    cout << "Impossible";
 
     return 0;
 }

@@ -83,14 +83,19 @@ pair<long long, long long> primeReduction(long long N, long long executions){
     if(isPrime(N)){
         return {N, executions + 1};
     }
-    map<long long, long long> factors = factor(N);
-    long long x = 0;
-    for(long long i = 0; i < factors.size(); i++){
-        if(factors[i] > 0){
-            x += i * factors[i];
+    long long x = N;
+    while(!isPrime(x)){
+        map<long long, long long> factors = factor(x);
+        x = 0;
+        for(long long i = 0; i < factors.size(); i++){
+            if(factors[i] > 0){
+                x += i * factors[i];
+            }
         }
+        executions++;
     }
-    return primeReduction(x, executions + 1);
+    return {x, executions + 1};
+    
 }
 
 int main(){
@@ -103,20 +108,6 @@ int main(){
         cin >> N;
 
         if(N == 4){ break; }
-
-        // vector<long long> primes;
-        // primes = eratosthenes(N);
-
-        // for(auto p : primes){
-        //     map<long long, long long> factors = factor(p);
-        //     for(int i = 0; i < factors.size(); i++){
-        //         if(factors[i] > 0){
-        //             cout << i << " " << factors[i] << " ";
-        //         }
-                
-        //     }
-        // }
-        // cout << "\n";
 
         pair<long long, long long> result = primeReduction(N, 0);
         cout << result.first << " " << result.second << "\n"; 

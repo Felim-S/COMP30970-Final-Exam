@@ -11,7 +11,7 @@ using namespace std;
 
 int main(){
 
-    long long n,m;
+    int n,m;
     vector<string> cases;
 
     int index = 1;
@@ -42,9 +42,9 @@ int main(){
 
         for(int i = 0; i < m; i++){
             // find the closest one
-            long long closestSum = LLONG_MAX;
+            long long closestSum = sums[0];
             for(int j = 0; j < sums.size(); j++){
-                if( (abs(ms[i] - sums[j])) < (abs(ms[i] - closestSum)) ){
+                if( abs((ms[i] + sums[j]) - (2 * ms[i])) < abs((ms[i] + closestSum) - (2 * ms[i])) ){
                     closestSum = sums[j];
                 }
             }

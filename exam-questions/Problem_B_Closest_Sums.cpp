@@ -11,29 +11,29 @@ using namespace std;
 
 int main(){
 
-    int n,m;
+    long long n,m;
     vector<string> cases;
 
     int index = 1;
 
     while(cin >> n){
         cases.push_back("Case " + to_string(index++) + ":");
-        vector<int> ns;
-        vector<int> ms;
+        vector<long long> ns;
+        vector<long long> ms;
         for(int i = 0; i < n; i++){
-            int x;
+            long long x;
             cin >> x;
             ns.push_back(x);
         }
         cin >> m;
         for(int i = 0; i < m; i++){
-            int x;
+            long long x;
             cin >> x;
             ms.push_back(x);
         }
 
         // find all possible sums of ns
-        vector<int> sums;
+        vector<long long> sums;
         for(int i = 0; i < n; i++){
             for(int j = i + 1; j < n; j++){
                 sums.push_back(ns[i] + ns[j]);
@@ -42,7 +42,7 @@ int main(){
 
         for(int i = 0; i < m; i++){
             // find the closest one
-            int closestSum = INT_MAX;
+            long long closestSum = LLONG_MAX;
             for(int j = 0; j < sums.size(); j++){
                 if( (abs(ms[i] - sums[j])) < (abs(ms[i] - closestSum)) ){
                     closestSum = sums[j];
